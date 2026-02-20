@@ -9,6 +9,8 @@ import java.util.List;
 
 @Repository
 public interface ScheduledPostRepository extends JpaRepository<ScheduledPost, Long> {
-    List<ScheduledPost> findBySession(PostSession session);
-    List<ScheduledPost> findBySessionAndStatus(PostSession session, ScheduledPost.PostStatus status);
+
+  List<ScheduledPost> findBySession(PostSession session);
+
+  List<ScheduledPost> findBySessionAndStatus(PostSession session, ScheduledPost.PostStatus status);
 }
