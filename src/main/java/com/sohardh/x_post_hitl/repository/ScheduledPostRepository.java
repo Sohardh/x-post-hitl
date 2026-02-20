@@ -13,4 +13,6 @@ public interface ScheduledPostRepository extends JpaRepository<ScheduledPost, Lo
   List<ScheduledPost> findBySession(PostSession session);
 
   List<ScheduledPost> findBySessionAndStatus(PostSession session, ScheduledPost.PostStatus status);
+
+  List<ScheduledPost> findByStatus(ScheduledPost.PostStatus status);
 }

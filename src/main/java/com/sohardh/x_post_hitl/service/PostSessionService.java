@@ -24,6 +24,7 @@ public class PostSessionService {
   private final XPromptEngine promptEngine;
   private final PostSessionRepository postSessionRepository;
   private final ScheduledPostRepository scheduledPostRepository;
+  private final PublishingScheduler publishingScheduler;
 
   @Transactional
   public String startNewSession(int count) {
@@ -135,6 +136,9 @@ public class PostSessionService {
     session.setClosed(true);
     postSessionRepository.save(session);
     scheduledPostRepository.saveAll(allPosts);
+
+    // Trigger dynamic scheduling for approved posts
+    publishingScheduler.scheduleForApprovedPostsInSession(session.getId());
 
     return String.format(
         "Session %d closed. %d posts approved and scheduled for randomized publishing. Others discarded.",
